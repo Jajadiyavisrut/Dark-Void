@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+from auth import get_current_user
 from engine.disruption import get_affected_shipments, get_reroute
 from engine.recommendations import generate_recommendation
 
@@ -13,12 +14,12 @@ def _load() -> list:
 
 
 @router.get("")
-def list_shipments():
+def list_shipments(user: str = Depends(get_current_user)):
     return _load()
 
 
 @router.get("/{shipment_id}")
-def get_shipment(shipment_id: str):
+def get_shipment(shipment_id: str, user: str = Depends(get_current_user)):
     shipments = _load()
     shipment = next((s for s in shipments if s["id"] == shipment_id), None)
     if not shipment:
