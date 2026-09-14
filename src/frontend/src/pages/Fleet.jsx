@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { RefreshCw } from 'lucide-react'
 import { getFleet } from '../api/client'
 import KPICard from '../components/KPICard'
 import AlertBadge from '../components/AlertBadge'
@@ -29,9 +30,9 @@ export default function Fleet() {
       </div>
 
       <div className="kpi-grid">
-        <KPICard label="Total Assets" value={fleet.length}   variant="accent"  />
-        <KPICard label="Idle"         value={idle.length}    variant="warning" sub="available for redeployment" />
-        <KPICard label="In Use"       value={in_use.length}  variant="success" />
+        <KPICard label="Total Assets" value={fleet.length}  variant="accent"  />
+        <KPICard label="Idle"         value={idle.length}   variant="warning" sub="available for redeployment" />
+        <KPICard label="In Use"       value={in_use.length} variant="success" />
       </div>
 
       <div className="table-wrap">
@@ -47,9 +48,12 @@ export default function Fleet() {
                 <td>{a.location}</td>
                 <td>{a.capacity_tonnes}</td>
                 <td><AlertBadge value={a.status} /></td>
-                <td>{a.status === 'idle'
-                  ? <span style={{color:'var(--warning)', fontSize:12}}>⚡ Available for redeployment</span>
-                  : '—'}
+                <td>
+                  {a.status === 'idle'
+                    ? <span style={{display:'inline-flex', alignItems:'center', gap:6, color:'var(--warning)', fontSize:12}}>
+                        <RefreshCw size={12} /> Available for redeployment
+                      </span>
+                    : '—'}
                 </td>
               </tr>
             ))}
