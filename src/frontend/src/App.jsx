@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar      from './components/Navbar'
+import TopHeader   from './components/TopHeader'
 import Dashboard   from './pages/Dashboard'
 import Disruptions from './pages/Disruptions'
 import Fleet       from './pages/Fleet'
@@ -15,7 +16,10 @@ function AppLayout({ children }) {
   return (
     <div className="layout">
       <Navbar />
-      <main className="main-content">{children}</main>
+      <div className="content-viewport">
+        <TopHeader />
+        <main className="main-content">{children}</main>
+      </div>
     </div>
   )
 }
