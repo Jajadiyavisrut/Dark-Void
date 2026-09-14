@@ -1,24 +1,36 @@
 # Solution Overview
 
-**SupplyFlow AI** is a lightweight, high-visibility dashboard designed to triage supply chain disruptions instantly.
+**SupplyFlow AI** is an executive-grade operational telemetry and autonomous supply chain dispatch environment designed for instantaneous triage and proactive resolution of global logistics disruptions.
 
 ## What We Built
 
-A **React + FastAPI** web application with JWT authentication and four core supply chain modules:
+A **React 18 + FastAPI** web platform featuring the **Liquid Obsidian** dark glass aesthetic, JWT security, and interactive command modules:
 
-1. **Disruption Engine:** Ingests active shipment routes and identifies which shipments pass through a disrupted node (port, road, region). Returns a reroute recommendation from a curated alternatives table.
-2. **Asset Matcher:** Scans the fleet data to find idle assets near disrupted shipments for immediate redeployment.
-3. **Cold Chain Monitor:** Evaluates IoT sensor readings against regulatory thresholds. Classifies breaches as WARNING (<2h) or CRITICAL (≥2h) using the standard 2-hour regulatory rule.
-4. **Recommendation Engine:** Assembles a plain-language action summary from the above three modules — no LLM required.
+1. **Autonomous Disruption Engine:**
+   - Ingests active container corridors and correlates disrupted geographic nodes (dock strikes, landslides, tropical storms).
+   - Generates 1-Click AI reroute approval with verified cost/time avoidance analytics.
+   - Pushes turn-by-turn bypass telemetry directly to driver terminals.
+
+2. **Fleet Capacity Re-Balancing:**
+   - Real-time visibility into continental assets (trucks, containers, maritime vessels).
+   - Multi-select bulk redeployment and one-click auto-dispatch to immediately allocate idle tonnage to congested hubs.
+   - Route assignment console and live GPS telematics modal with battery and ground velocity metrics.
+
+3. **Cold Chain Biosensor Monitor:**
+   - Continuous IoT temperature streaming against pharmaceutical and perishable regulatory envelopes.
+   - Classifies excursions by regulatory severity (WARNING for <2h, CRITICAL for ≥2h).
+   - Dynamic SVG thermal trajectory wave with calibrated safe bands.
+   - Active Intervention trigger: instantly activates emergency auxiliary refrigeration to recover cargo temperature.
+   - Regulatory compliance logs exportable under FDA 21 CFR Part 11 / EU GDP validation.
+
+4. **Executive Operational Instrumentation:**
+   - Top executive header with live UTC clock, search-as-you-type, timeframes, and global mesh sync.
+   - Specular glass KPI cards with trend sparklines and ambient optical glows.
+   - Responsive multi-filter tables with instant client-side search and column sorting.
 
 ## Security
 
-Authentication is handled via **JWT (JSON Web Tokens)**:
-- Passwords are hashed with `bcrypt` before storage
-- Login returns a signed JWT valid for 60 minutes
-- All supply chain endpoints are protected — requests without a valid Bearer token receive a `401 Unauthorized` response
-- The React frontend automatically attaches the token to every API call and redirects to the login page on expiry
-
-## Why This Approach?
-
-Rather than building a monolithic enterprise app, we built a focused, minimal system. The FastAPI backend handles logic and auth; the React dashboard handles display. All data is driven from realistic mock JSON fixtures, making the demo fully self-contained without any external dependencies.
+Authentication is strictly enforced via **JWT (JSON Web Tokens)**:
+- Passwords hashed with `bcrypt` (Passlib).
+- Signed tokens with Bearer Authorization header interceptors.
+- Automatic session invalidation on 401 status.
