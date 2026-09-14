@@ -1,8 +1,7 @@
-"""JWT helpers, password hashing, mock user store, and auth dependency."""
 import os
+import bcrypt
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
@@ -10,8 +9,7 @@ SECRET_KEY   = os.getenv("JWT_SECRET", "supplyflow-dev-secret-changeme")
 ALGORITHM    = "HS256"
 EXPIRE_MINS  = int(os.getenv("JWT_EXPIRE_MINUTES", "60"))
 
-pwd_ctx    = CryptContext(schemes=["bcrypt"], deprecated="auto")
-bearer     = HTTPBearer()
+bearer = HTTPBearer()
 
 # ponytail: in-memory dict — fine for demo, swap for a DB for production
 _USERS: dict[str, str] = {}   # username -> hashed_password
@@ -19,17 +17,17 @@ _USERS: dict[str, str] = {}   # username -> hashed_password
 # Pre-seed a demo account so the app works without registering
 def _seed():
     if "demo" not in _USERS:
-        _USERS["demo"] = pwd_ctx.hash("demo123")
+        _USERS["demo"] = bcrypt.hashpw(b"demo123", bcrypt.gensalt()).decode()
 
 _seed()
 
 
 def hash_password(plain: str) -> str:
-    return pwd_ctx.hash(plain)
+    return bcrypt.hashpw(plain.encode(), bcrypt.gensalt()).decode()
 
 
 def verify_password(plain: str, hashed: str) -> bool:
-    return pwd_ctx.verify(plain, hashed)
+    return bcrypt.checkpw(plain.encode(), hashed.encode())
 
 
 def create_token(username: str) -> str:
