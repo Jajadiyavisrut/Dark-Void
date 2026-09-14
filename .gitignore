@@ -6,8 +6,8 @@ __pycache__/
 src/backend/.env
 
 # Node
-src/frontend/node_modules/
-src/frontend/dist/
+node_modules/
+dist/
 
 # OS
 .DS_Store
