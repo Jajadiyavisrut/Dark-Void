@@ -6,22 +6,22 @@
 
 | Field | Value |
 |---|---|
-| **Team Name** | [Your Team Name] |
-| **Track** | [AI / DevOps / Sustainability / Open] |
-| **Team Lead** | [Name] — [email@ibm.com] |
-| **Members** | [Name 1], [Name 2], [Name 3] |
+| **Team Name** | Daredevils |
+| **Track** | AI |
+| **Team Lead** | Yug Bhatt — yug@example.com |
+| **Members** | Visrut Jajadiya, Maharsh Solanki, Milan Vadhel |
 
 ---
 
 ## 🎯 Problem Statement
 
-Supply chain problems such as bad weather, port strikes, and geopolitical events can affect many shipments at the same time. At the same time, some trucks, containers, or other fleet assets may be sitting unused while other routes are overloaded. Cold-chain shipments are especially vulnerable because a temperature problem can damage sensitive goods. 
+Supply chain disruptions like port strikes cascade across shipments, causing fleet assets to idle. Simultaneously, cold chain shipments lack real-time temperature monitoring, leading to undetected spoilage before delivery.
 
 ---
 
 ## 💡 Solution
 
-**SupplyFlow AI** is an AI-powered supply-chain assistant that helps companies quickly understand disruptions and decide what to do next. It automatically detects disruptions, identifies affected shipments, recommends alternative routes and carriers, finds idle fleet assets, and detects cold-chain temperature problems.
+**SupplyFlow AI** is a Streamlit dashboard and Python MCP server that correlates active disruptions with shipments, identifies idle fleet assets, and monitors cold chain IoT logs. It integrates with IBM Bob to conversationalize supply chain triage.
 
 ---
 
@@ -31,7 +31,7 @@ Supply chain problems such as bad weather, port strikes, and geopolitical events
 - **Route & Carrier Recommendation:** Suggests alternative routes and available carriers if current ones are affected.
 - **Fleet Utilisation:** Identifies idle vehicles or other assets and suggests redeployment opportunities.
 - **Cold Chain Monitoring:** Analyzes sensor data to detect temperature excursions before delivery.
-- **AI Recommendation & Chat Assistant:** Provides prioritized action plans and answers natural language queries about the supply chain state.
+- **AI Recommendation & Chat Assistant:** Provides prioritized action plans using IBM Bob via a custom MCP Server.
 
 ---
 
@@ -39,18 +39,18 @@ Supply chain problems such as bad weather, port strikes, and geopolitical events
 
 | Category | Technologies |
 |---|---|
-| **Languages** | [e.g., Python, TypeScript] |
-| **Frameworks** | [e.g., FastAPI, React] |
-| **IBM Technologies** | IBM Bob, [e.g., watsonx.ai, IBM Cloud] |
-| **Databases** | [e.g., PostgreSQL, Redis] |
-| **Other** | [e.g., Docker, GitHub Actions] |
+| **Languages** | Python |
+| **Frameworks** | Streamlit |
+| **IBM Technologies** | IBM Bob, MCP (Model Context Protocol), watsonx.ai |
+| **Databases** | Local JSON (Mock Data) |
+| **Other** | python-dotenv |
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-├── src/                  # All source code
+├── src/                  # All source code (Streamlit + MCP server)
 ├── docs/                 # Written documentation
 │   ├── problem-statement.md
 │   ├── solution-overview.md
@@ -71,18 +71,21 @@ Supply chain problems such as bad weather, port strikes, and geopolitical events
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/[your-repo].git
-cd [your-repo]
+git clone https://github.com/Jajadiyavisrut/Dark-Void.git
+cd Dark-Void
 
 # 2. Install dependencies
-[your install command here]
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r src/requirements.txt
 
 # 3. Configure environment
-cp .env.example .env
-# Edit .env with your values
+cp src/.env.example src/.env
+# Edit src/.env with your values
 
 # 4. Run the project
-[your run command here]
+cd src
+streamlit run app.py
 ```
 
 ---
@@ -92,7 +95,7 @@ cp .env.example .env
 | Artifact | Link |
 |---|---|
 | 📹 Demo Video | [See demo/demo-video-link.txt](demo/demo-video-link.txt) |
-| 🌐 Live Demo | [See demo/live-demo-url.txt](demo/live-demo-url.txt) |
+| 🌐 Live Demo | NOT DEPLOYED |
 | 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
 | 📊 Presentation | [See presentation/slides.pdf](presentation/) |
 
@@ -102,12 +105,12 @@ cp .env.example .env
 
 > Be honest - judges appreciate transparency over overclaiming.
 
-- [Limitation 1: e.g., "Authentication is mocked - not production-ready"]
-- [Limitation 2: e.g., "Only tested on Chrome"]
-- [Limitation 3: e.g., "Feature X is scaffolded but not fully implemented"]
+- Authentication is mocked - not production-ready.
+- Uses mock JSON data instead of a live database.
+- Reroute logic is a naive heuristic (ponytail: O(n) hardcoded routes) rather than a full Dijkstra/A* graph traversal.
 
 ---
 
 ## 🏆 What We're Most Proud Of
 
-[Tell the judges what part of your submission is strongest and worth paying close attention to.]
+The seamless integration of our core Python logic with IBM Bob via an MCP Server, allowing natural language queries directly against live supply chain state without building a complex conversational UI from scratch.

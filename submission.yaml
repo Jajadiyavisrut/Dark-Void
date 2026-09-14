@@ -1,0 +1,25 @@
+team:
+  name: "Daredevils"
+  track: "AI"
+  lead:
+    name: "Yug Bhatt"
+    email: "yug@example.com"
+  members:
+    - name: "Visrut Jajadiya"
+      email: "visrut@example.com"
+    - name: "Maharsh Solanki"
+      email: "maharsh@example.com"
+    - name: "Milan Vadhel"
+      email: "milan@example.com"
+
+submission:
+  title: "SupplyFlow AI"
+  problem_statement: >
+    Supply chain disruptions like port strikes cascade across shipments, causing fleet assets to idle. Simultaneously, cold chain shipments lack real-time temperature monitoring, leading to undetected spoilage before delivery.
+  solution_summary: >
+    SupplyFlow AI is a Streamlit dashboard and Python MCP server that correlates active disruptions with shipments, identifies idle fleet assets, and monitors cold chain IoT logs. It integrates with IBM Bob to conversationalize supply chain triage.
+  key_features:
+    - "Real-time shipment disruption mapping and reroute recommendations"
+    - "Idle fleet asset identification for rapid redeployment"
+    - "IoT temperature excursion detection with regulatory severity classification"
+    - "Conversational supply chain triage using IBM Bob via custom MCP Server"
