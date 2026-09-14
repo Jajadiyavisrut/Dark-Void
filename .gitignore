@@ -1,3 +1,6 @@
+# Tooling
+.agents/
+
 # Python
 src/backend/.venv/
 __pycache__/
