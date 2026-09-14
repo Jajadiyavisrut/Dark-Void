@@ -2,9 +2,9 @@
 
 ## Prerequisites
 - Python 3.10+
-- IBM Bob CLI installed
+- Node.js 18+
 
-## Installation
+## Backend Setup
 
 1. **Clone the repository**
    ```bash
@@ -12,40 +12,48 @@
    cd Dark-Void
    ```
 
-2. **Set up the virtual environment**
+2. **Create virtual environment and install dependencies**
    ```bash
+   cd src/backend
    python -m venv .venv
+
    # Windows
    .venv\Scripts\activate
    # Mac/Linux
    source .venv/bin/activate
+
+   pip install -r requirements.txt
    ```
 
-3. **Install dependencies**
+3. **Configure environment**
    ```bash
-   pip install -r src/requirements.txt
+   # Windows
+   copy .env.example .env
+   # Mac/Linux
+   cp .env.example .env
    ```
 
-4. **Configure Environment**
+4. **Run the API server**
    ```bash
-   cp src/.env.example src/.env
-   # Edit src/.env and add your API keys
+   uvicorn main:app --reload
+   ```
+   API will be available at `http://localhost:8000`
+
+## Frontend Setup
+
+1. **Install dependencies**
+   ```bash
+   cd src/frontend
+   npm install
    ```
 
-## Running the Application
-
-**Run the Streamlit Dashboard:**
-```bash
-cd src
-streamlit run app.py
-```
-
-**Run the IBM Bob MCP Server:**
-```bash
-cd src
-python mcp_server.py
-```
+2. **Run the dev server**
+   ```bash
+   npm run dev
+   ```
+   Dashboard will be available at `http://localhost:5173`
 
 ## Verification
-- The Streamlit dashboard should be accessible at `http://localhost:8501`.
-- You can test the MCP server by running IBM Bob and asking it to check the supply chain status.
+- Open `http://localhost:5173` — dashboard loads with live data from the API
+- Open `http://localhost:8000/docs` — FastAPI auto-generated Swagger UI
+- All 4 pages (Dashboard, Disruptions, Fleet, Cold Chain) should show data
