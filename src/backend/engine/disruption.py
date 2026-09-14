@@ -68,4 +68,4 @@ if __name__ == "__main__":
     reroute = get_reroute("SHP-1001")
     assert reroute is not None, "No reroute found for SHP-1001"
     assert reroute["via"] == "PORT-B"
-    print(f"✓ disruption.py OK — {len(affected)} shipments affected by DIST-001, reroute via {reroute['via']}")
+    print(f"[OK] disruption.py — {len(affected)} shipments affected by DIST-001, reroute via {reroute['via']}")

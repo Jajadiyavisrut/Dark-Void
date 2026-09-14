@@ -33,4 +33,4 @@ if __name__ == "__main__":
     assert len(idle) > 0, "No idle assets found"
     match = match_to_shipment("SHP-1001")
     assert match is not None, "No asset matched for SHP-1001"
-    print(f"✓ fleet.py OK — {len(idle)} idle assets, matched {match['id']} for SHP-1001")
+    print(f"[OK] fleet.py — {len(idle)} idle assets, matched {match['id']} for SHP-1001")

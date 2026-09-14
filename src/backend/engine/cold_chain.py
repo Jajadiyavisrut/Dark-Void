@@ -37,4 +37,4 @@ if __name__ == "__main__":
     ok        = [e for e in excursions if e["severity"] == "OK"]
     assert len(critical) >= 1, "Expected at least 1 CRITICAL excursion in test data"
     assert len(ok) >= 1, "Expected at least 1 OK reading in test data"
-    print(f"✓ cold_chain.py OK — {len(critical)} CRITICAL, {len(warnings)} WARNING, {len(ok)} OK")
+    print(f"[OK] cold_chain.py — {len(critical)} CRITICAL, {len(warnings)} WARNING, {len(ok)} OK")
