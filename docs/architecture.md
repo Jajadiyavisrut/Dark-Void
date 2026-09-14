@@ -1,27 +1,35 @@
 # Architecture
 
-Our architecture is designed to be minimal, leveraging Python for both the frontend dashboard and the backend AI integration.
+Our architecture is minimal — Python backend, React frontend, no database.
 
 ## Component Breakdown
 
 | Component | Technology | Responsibility |
 |---|---|---|
-| **Dashboard** | Streamlit (Python) | Provides a visual overview of shipments, disruptions, and IoT alerts. |
-| **Backend / API** | Python MCP Server | Processes raw JSON data, runs disruption logic, and exposes endpoints. |
-| **AI Assistant** | IBM Bob CLI | Connects to the MCP server to answer natural language queries. |
-| **Environment** | `python-dotenv` | Manages configuration and secrets safely. |
+| **Dashboard** | React 18 + Vite (JSX) | Visual overview of shipments, disruptions, fleet, cold chain |
+| **API** | FastAPI (Python) | Serves JSON data, runs engine logic, handles CORS |
+| **Engine** | Pure Python modules | Disruption detection, fleet matching, cold chain severity |
+| **Data** | Mock JSON files | Realistic supply chain fixtures — no DB required |
+| **Config** | `python-dotenv` | Manages environment variables safely |
 
 ## Data Flow
 
 ```mermaid
 graph TD
-    A[Mock Data: Shipments, Fleet, IoT] -->|Read| B[Streamlit Dashboard]
-    A -->|Read| C[Python MCP Server]
-    D[User] -->|Views UI| B
-    D -->|Chat prompt| E[IBM Bob CLI]
-    E -->|MCP call| C
-    C -->|Query| F[watsonx.ai / LLM]
-    F -->|Response| C
-    C -->|Context| E
-    E -->|Answer| D
+    A[Mock JSON Data] -->|Read on request| B[FastAPI Routers]
+    B -->|Calls| C[Engine Modules]
+    C --> C1[disruption.py]
+    C --> C2[fleet.py]
+    C --> C3[cold_chain.py]
+    C --> C4[recommendations.py]
+    B -->|JSON response| D[React Frontend]
+    E[User] -->|Browser| D
+    D -->|HTTP GET /api/*| B
 ```
+
+## Port Mapping
+
+| Service | Port |
+|---|---|
+| FastAPI backend | `8000` |
+| React frontend (Vite dev) | `5173` |
