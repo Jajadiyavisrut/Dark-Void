@@ -27,6 +27,7 @@ Supply chain disruptions — port strikes, bad weather, geopolitical events — 
 
 ## ✨ Key Features
 
+- **JWT Authentication:** Secure login with bcrypt password hashing and signed tokens — all API routes protected
 - **Disruption Detection:** Maps active disruptions to affected shipments by route node matching
 - **Reroute Recommendations:** Suggests alternative routes with estimated delay deltas
 - **Fleet Utilisation:** Highlights idle assets and matches them to disrupted shipments
@@ -41,6 +42,7 @@ Supply chain disruptions — port strikes, bad weather, geopolitical events — 
 |---|---|
 | **Languages** | Python 3.10+, JavaScript (JSX) |
 | **Frameworks** | FastAPI, React 18, Vite |
+| **Auth** | JWT (`python-jose`), bcrypt (`passlib`) |
 | **IBM Technologies** | IBM Bob (hackathon submission context) |
 | **Data** | Mock JSON fixtures (self-contained, no DB) |
 | **Other** | python-dotenv, React Router, Axios |
