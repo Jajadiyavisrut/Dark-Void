@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Snowflake } from 'lucide-react'
 import { getShipments, getDisruptions, getIdleFleet, getColdChainAlerts } from '../api/client'
 import KPICard from '../components/KPICard'
 import AlertBadge from '../components/AlertBadge'
@@ -33,11 +34,11 @@ export default function Dashboard() {
       </div>
 
       <div className="kpi-grid">
-        <KPICard label="Active Shipments"    value={shipments.length}        sub="total tracked"      variant="accent"  />
-        <KPICard label="Active Disruptions"  value={activeDisruptions.length} sub="requiring action"  variant="danger"  />
-        <KPICard label="Delayed Shipments"   value={delayedShipments.length}  sub="off schedule"      variant="warning" />
-        <KPICard label="Idle Fleet Assets"   value={idle.length}              sub="available now"     variant="success" />
-        <KPICard label="Cold Chain Alerts"   value={coldChainIssues.length}   sub="temp excursions"   variant="danger"  />
+        <KPICard label="Active Shipments"   value={shipments.length}         sub="total tracked"    variant="accent"  />
+        <KPICard label="Active Disruptions" value={activeDisruptions.length} sub="requiring action" variant="danger"  />
+        <KPICard label="Delayed Shipments"  value={delayedShipments.length}  sub="off schedule"     variant="warning" />
+        <KPICard label="Idle Fleet Assets"  value={idle.length}              sub="available now"    variant="success" />
+        <KPICard label="Cold Chain Alerts"  value={coldChainIssues.length}   sub="temp excursions"  variant="danger"  />
       </div>
 
       <h2 style={{marginBottom:14, fontSize:15, fontWeight:600}}>Recent Shipments</h2>
@@ -56,7 +57,13 @@ export default function Dashboard() {
                 <td>{s.origin}</td>
                 <td>{s.destination}</td>
                 <td>{s.carrier}</td>
-                <td>{s.cold_chain ? '❄ Yes' : '—'}</td>
+                <td>
+                  {s.cold_chain
+                    ? <span style={{display:'inline-flex', alignItems:'center', gap:4, color:'var(--accent)'}}>
+                        <Snowflake size={13} /> Yes
+                      </span>
+                    : '—'}
+                </td>
                 <td><AlertBadge value={s.status} /></td>
                 <td>{s.estimated_delay_hours > 0 ? `+${s.estimated_delay_hours}h` : '—'}</td>
               </tr>
