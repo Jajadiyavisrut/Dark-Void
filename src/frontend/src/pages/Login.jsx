@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ShieldCheck } from 'lucide-react'
 import axios from 'axios'
 
 export default function Login() {
@@ -43,9 +44,12 @@ export default function Login() {
         flexDirection: 'column',
         gap: 20,
       }}>
-        <div>
-          <h1 style={{ fontSize: 22, fontWeight: 700 }}>SupplyFlow <span style={{ color: 'var(--accent)' }}>AI</span></h1>
-          <p style={{ color: 'var(--muted)', marginTop: 4, fontSize: 13 }}>Sign in to access the dashboard</p>
+        <div style={{display:'flex', alignItems:'center', gap:10}}>
+          <ShieldCheck size={28} style={{color:'var(--accent)'}} />
+          <div>
+            <h1 style={{ fontSize: 22, fontWeight: 700 }}>SupplyFlow <span style={{ color: 'var(--accent)' }}>AI</span></h1>
+            <p style={{ color: 'var(--muted)', marginTop: 2, fontSize: 13 }}>Sign in to access the dashboard</p>
+          </div>
         </div>
 
         {error && (
