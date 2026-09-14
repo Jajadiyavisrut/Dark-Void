@@ -1,24 +1,51 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar      from './components/Navbar'
 import Dashboard   from './pages/Dashboard'
 import Disruptions from './pages/Disruptions'
 import Fleet       from './pages/Fleet'
 import ColdChain   from './pages/ColdChain'
+import Login       from './pages/Login'
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('token')
+  return token ? children : <Navigate to="/login" replace />
+}
+
+function AppLayout({ children }) {
+  return (
+    <div className="layout">
+      <Navbar />
+      <main className="main-content">{children}</main>
+    </div>
+  )
+}
 
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="layout">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/"            element={<Dashboard />}   />
-            <Route path="/disruptions" element={<Disruptions />} />
-            <Route path="/fleet"       element={<Fleet />}       />
-            <Route path="/cold-chain"  element={<ColdChain />}   />
-          </Routes>
-        </main>
-      </div>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={
+          <ProtectedRoute>
+            <AppLayout><Dashboard /></AppLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/disruptions" element={
+          <ProtectedRoute>
+            <AppLayout><Disruptions /></AppLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/fleet" element={
+          <ProtectedRoute>
+            <AppLayout><Fleet /></AppLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/cold-chain" element={
+          <ProtectedRoute>
+            <AppLayout><ColdChain /></AppLayout>
+          </ProtectedRoute>
+        } />
+      </Routes>
     </BrowserRouter>
   )
 }
