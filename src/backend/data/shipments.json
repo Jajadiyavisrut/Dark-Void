@@ -1,0 +1,202 @@
+[
+  {
+    "id": "SHP-1001",
+    "origin": "Ahmedabad",
+    "destination": "Mumbai Port",
+    "route": ["Ahmedabad", "PORT-A", "Mumbai"],
+    "carrier": "Carrier A",
+    "status": "delayed",
+    "cold_chain": true,
+    "estimated_delay_hours": 8
+  },
+  {
+    "id": "SHP-1002",
+    "origin": "Delhi",
+    "destination": "Chennai",
+    "route": ["Delhi", "Nagpur", "Chennai"],
+    "carrier": "Carrier B",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1003",
+    "origin": "Kolkata",
+    "destination": "Mumbai Port",
+    "route": ["Kolkata", "PORT-A", "Mumbai"],
+    "carrier": "Carrier A",
+    "status": "delayed",
+    "cold_chain": false,
+    "estimated_delay_hours": 10
+  },
+  {
+    "id": "SHP-1004",
+    "origin": "Surat",
+    "destination": "Pune",
+    "route": ["Surat", "Pune"],
+    "carrier": "Carrier C",
+    "status": "on_time",
+    "cold_chain": true,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1005",
+    "origin": "Hyderabad",
+    "destination": "Mumbai Port",
+    "route": ["Hyderabad", "PORT-A", "Mumbai"],
+    "carrier": "Carrier A",
+    "status": "delayed",
+    "cold_chain": true,
+    "estimated_delay_hours": 12
+  },
+  {
+    "id": "SHP-1006",
+    "origin": "Jaipur",
+    "destination": "Delhi",
+    "route": ["Jaipur", "Delhi"],
+    "carrier": "Carrier B",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1007",
+    "origin": "Bengaluru",
+    "destination": "Chennai",
+    "route": ["Bengaluru", "ROAD-BLOCK-1", "Chennai"],
+    "carrier": "Carrier D",
+    "status": "delayed",
+    "cold_chain": false,
+    "estimated_delay_hours": 5
+  },
+  {
+    "id": "SHP-1008",
+    "origin": "Lucknow",
+    "destination": "Mumbai Port",
+    "route": ["Lucknow", "PORT-A", "Mumbai"],
+    "carrier": "Carrier A",
+    "status": "delayed",
+    "cold_chain": true,
+    "estimated_delay_hours": 9
+  },
+  {
+    "id": "SHP-1009",
+    "origin": "Bhopal",
+    "destination": "Nagpur",
+    "route": ["Bhopal", "Nagpur"],
+    "carrier": "Carrier C",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1010",
+    "origin": "Indore",
+    "destination": "Chennai",
+    "route": ["Indore", "Bengaluru", "ROAD-BLOCK-1", "Chennai"],
+    "carrier": "Carrier D",
+    "status": "delayed",
+    "cold_chain": true,
+    "estimated_delay_hours": 6
+  },
+  {
+    "id": "SHP-1011",
+    "origin": "Chandigarh",
+    "destination": "Delhi",
+    "route": ["Chandigarh", "Delhi"],
+    "carrier": "Carrier B",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1012",
+    "origin": "Kochi",
+    "destination": "Mumbai Port",
+    "route": ["Kochi", "PORT-A", "Mumbai"],
+    "carrier": "Carrier A",
+    "status": "delayed",
+    "cold_chain": false,
+    "estimated_delay_hours": 11
+  },
+  {
+    "id": "SHP-1013",
+    "origin": "Visakhapatnam",
+    "destination": "Chennai",
+    "route": ["Visakhapatnam", "Chennai"],
+    "carrier": "Carrier D",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1014",
+    "origin": "Patna",
+    "destination": "Kolkata",
+    "route": ["Patna", "Kolkata"],
+    "carrier": "Carrier B",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1015",
+    "origin": "Coimbatore",
+    "destination": "Mumbai Port",
+    "route": ["Coimbatore", "PORT-A", "Mumbai"],
+    "carrier": "Carrier A",
+    "status": "delayed",
+    "cold_chain": true,
+    "estimated_delay_hours": 14
+  },
+  {
+    "id": "SHP-1016",
+    "origin": "Agra",
+    "destination": "Delhi",
+    "route": ["Agra", "Delhi"],
+    "carrier": "Carrier C",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1017",
+    "origin": "Nagpur",
+    "destination": "Hyderabad",
+    "route": ["Nagpur", "Hyderabad"],
+    "carrier": "Carrier C",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  },
+  {
+    "id": "SHP-1018",
+    "origin": "Amritsar",
+    "destination": "Mumbai Port",
+    "route": ["Amritsar", "Delhi", "PORT-A", "Mumbai"],
+    "carrier": "Carrier A",
+    "status": "delayed",
+    "cold_chain": false,
+    "estimated_delay_hours": 7
+  },
+  {
+    "id": "SHP-1019",
+    "origin": "Mangalore",
+    "destination": "Bengaluru",
+    "route": ["Mangalore", "ROAD-BLOCK-1", "Bengaluru"],
+    "carrier": "Carrier D",
+    "status": "delayed",
+    "cold_chain": false,
+    "estimated_delay_hours": 4
+  },
+  {
+    "id": "SHP-1020",
+    "origin": "Rajkot",
+    "destination": "Mumbai Port",
+    "route": ["Rajkot", "PORT-B", "Mumbai"],
+    "carrier": "Carrier C",
+    "status": "on_time",
+    "cold_chain": false,
+    "estimated_delay_hours": 0
+  }
+]

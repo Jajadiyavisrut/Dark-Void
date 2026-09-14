@@ -1,0 +1,72 @@
+[
+  {
+    "id": "TRK-01",
+    "type": "truck",
+    "status": "idle",
+    "location": "Surat",
+    "capacity_tonnes": 20
+  },
+  {
+    "id": "TRK-02",
+    "type": "truck",
+    "status": "in_use",
+    "location": "Delhi",
+    "capacity_tonnes": 15
+  },
+  {
+    "id": "TRK-03",
+    "type": "truck",
+    "status": "idle",
+    "location": "Nagpur",
+    "capacity_tonnes": 20
+  },
+  {
+    "id": "TRK-04",
+    "type": "truck",
+    "status": "in_use",
+    "location": "Kolkata",
+    "capacity_tonnes": 25
+  },
+  {
+    "id": "TRK-05",
+    "type": "truck",
+    "status": "idle",
+    "location": "Ahmedabad",
+    "capacity_tonnes": 18
+  },
+  {
+    "id": "CTN-01",
+    "type": "container",
+    "status": "idle",
+    "location": "Mumbai",
+    "capacity_tonnes": 30
+  },
+  {
+    "id": "CTN-02",
+    "type": "container",
+    "status": "in_use",
+    "location": "Chennai",
+    "capacity_tonnes": 30
+  },
+  {
+    "id": "CTN-03",
+    "type": "container",
+    "status": "idle",
+    "location": "Hyderabad",
+    "capacity_tonnes": 25
+  },
+  {
+    "id": "VSL-01",
+    "type": "vessel",
+    "status": "in_use",
+    "location": "PORT-A",
+    "capacity_tonnes": 500
+  },
+  {
+    "id": "VSL-02",
+    "type": "vessel",
+    "status": "idle",
+    "location": "PORT-B",
+    "capacity_tonnes": 450
+  }
+]

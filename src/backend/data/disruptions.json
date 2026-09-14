@@ -1,0 +1,32 @@
+[
+  {
+    "id": "DIST-001",
+    "type": "port_closure",
+    "title": "Mumbai Port A Closure",
+    "description": "PORT-A is closed due to a dock worker strike. No vessels loading or unloading.",
+    "affected_node": "PORT-A",
+    "severity": "high",
+    "active": true,
+    "started_at": "2026-09-14T06:00:00Z"
+  },
+  {
+    "id": "DIST-002",
+    "type": "road_blockage",
+    "title": "NH-48 Road Blockage near Bengaluru",
+    "description": "ROAD-BLOCK-1 on NH-48 is blocked due to a landslide. Expected clearance in 24 hours.",
+    "affected_node": "ROAD-BLOCK-1",
+    "severity": "medium",
+    "active": true,
+    "started_at": "2026-09-14T14:00:00Z"
+  },
+  {
+    "id": "DIST-003",
+    "type": "weather",
+    "title": "Cyclone Warning — Bay of Bengal",
+    "description": "Severe cyclone warning issued for eastern coastal routes. Shipments via Visakhapatnam and Kolkata may be affected.",
+    "affected_node": "CYCLONE-ZONE-1",
+    "severity": "high",
+    "active": false,
+    "started_at": "2026-09-13T20:00:00Z"
+  }
+]

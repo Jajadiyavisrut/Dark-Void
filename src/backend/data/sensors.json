@@ -1,0 +1,44 @@
+[
+  {
+    "shipment_id": "SHP-1001",
+    "required_min_c": 2,
+    "required_max_c": 8,
+    "current_temp_c": 11.3,
+    "breach_duration_hours": 2.5
+  },
+  {
+    "shipment_id": "SHP-1004",
+    "required_min_c": 2,
+    "required_max_c": 8,
+    "current_temp_c": 5.1,
+    "breach_duration_hours": 0
+  },
+  {
+    "shipment_id": "SHP-1005",
+    "required_min_c": -18,
+    "required_max_c": -15,
+    "current_temp_c": -10.2,
+    "breach_duration_hours": 3.1
+  },
+  {
+    "shipment_id": "SHP-1008",
+    "required_min_c": 15,
+    "required_max_c": 25,
+    "current_temp_c": 20.0,
+    "breach_duration_hours": 0
+  },
+  {
+    "shipment_id": "SHP-1010",
+    "required_min_c": 2,
+    "required_max_c": 8,
+    "current_temp_c": 9.8,
+    "breach_duration_hours": 1.2
+  },
+  {
+    "shipment_id": "SHP-1015",
+    "required_min_c": 2,
+    "required_max_c": 8,
+    "current_temp_c": 3.5,
+    "breach_duration_hours": 0
+  }
+]
