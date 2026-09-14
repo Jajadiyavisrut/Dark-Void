@@ -99,21 +99,19 @@ def get_gps_telematics(asset_id: str, user: str = Depends(get_current_user)):
     if not asset:
         raise HTTPException(status_code=404, detail="Asset not found")
 
-    coords = {
-        "TRK-01": {"lat": 21.1702, "lng": 72.8311, "city": "Surat", "speed_kmh": 0, "driver": "Ramesh Patel", "battery_pct": 98},
-        "TRK-02": {"lat": 28.6139, "lng": 77.2090, "city": "Delhi", "speed_kmh": 58, "driver": "Gurpreet Singh", "battery_pct": 84},
-        "TRK-03": {"lat": 21.1458, "lng": 79.0882, "city": "Nagpur", "speed_kmh": 0, "driver": "Kailash Jadhav", "battery_pct": 92},
-        "TRK-04": {"lat": 22.5726, "lng": 88.3639, "city": "Kolkata", "speed_kmh": 62, "driver": "Subhash Ghosh", "battery_pct": 79},
-        "TRK-05": {"lat": 23.0225, "lng": 72.5714, "city": "Ahmedabad", "speed_kmh": 0, "driver": "Jayesh Shah", "battery_pct": 95},
-    }
-    telematics = coords.get(asset_id, {
-        "lat": 19.0760, "lng": 72.8777, "city": asset.get("location", "Mumbai"), "speed_kmh": 45, "driver": "Operator Unit", "battery_pct": 90
-    })
     return {
         "asset_id": asset_id,
         "type": asset.get("type"),
         "status": asset.get("status"),
-        **telematics,
+        "city": asset.get("location", "Central Hub"),
+        "lat": asset.get("lat", 19.0760),
+        "lng": asset.get("lng", 72.8777),
+        "speed_kmh": asset.get("speed_kmh", 0),
+        "driver": asset.get("driver", "Autonomous Unit"),
+        "battery_pct": asset.get("battery_pct", 95),
+        "destination": asset.get("destination"),
+        "assigned_route": asset.get("assigned_route"),
         "telemetry_synced": True,
         "latency_ms": 14
     }
+

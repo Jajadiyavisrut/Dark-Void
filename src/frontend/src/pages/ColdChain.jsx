@@ -98,23 +98,6 @@ export default function ColdChain() {
     return alerts
   }, [alerts, severityFilter, critical, warnings, ok])
 
-  const payloadTypes = {
-    'SHP-1001': 'Pharma Vaccines (mRNA)',
-    'SHP-1004': 'Insulin Cartridges',
-    'SHP-1005': 'Cryogenic Blood Plasma',
-    'SHP-1008': 'Biologic Reagents',
-    'SHP-1010': 'Oncology Infusions',
-    'SHP-1015': 'Enzyme Therapeutics'
-  }
-
-  const sensorBatteries = {
-    'SHP-1001': 94,
-    'SHP-1004': 98,
-    'SHP-1005': 88,
-    'SHP-1008': 95,
-    'SHP-1010': 91,
-    'SHP-1015': 99
-  }
 
   if (loading) return <p className="state-msg">Streaming Cold Chain Sensor Telemetry…</p>
   if (error)   return <p className="state-msg" style={{color:'var(--danger)'}}>Error: {error}</p>
@@ -466,9 +449,17 @@ export default function ColdChain() {
             alignItems: 'flex-start',
             gap: 10
           }}>
-            <AlertTriangle size={16} color="var(--red-txt)" style={{ marginTop: 2, flexShrink: 0 }} />
-            <div style={{ fontSize: 11, color: 'var(--red-txt)', lineHeight: 1.5 }}>
-              <strong>SHP-1005 Emergency Channel:</strong> Temperature breach detected. Active cooling protocol available below.
+            <AlertTriangle size={16} color={critical.length > 0 ? "var(--red-txt)" : "var(--green-txt)"} style={{ marginTop: 2, flexShrink: 0 }} />
+            <div style={{ fontSize: 11, color: critical.length > 0 ? 'var(--red-txt)' : 'var(--green-txt)', lineHeight: 1.5 }}>
+              {critical.length > 0 ? (
+                <>
+                  <strong>{critical[0].shipment_id} Emergency Channel:</strong> Temperature breach detected ({critical[0].current_temp_c}°C). Active cooling protocol available below.
+                </>
+              ) : (
+                <>
+                  <strong>Thermal Stability Confirmed:</strong> All active payloads operating within regulated safe bands.
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -554,8 +545,8 @@ export default function ColdChain() {
             {filteredAlerts.map(a => {
               const isCrit = a.severity === 'CRITICAL'
               const isWarn = a.severity === 'WARNING'
-              const battery = sensorBatteries[a.shipment_id] || 94
-              const payload = payloadTypes[a.shipment_id] || 'Regulated Biologics'
+              const battery = a.battery_pct ?? 94
+              const payload = a.cargo_type || 'Regulated Biologics'
 
               return (
                 <tr key={a.shipment_id}>

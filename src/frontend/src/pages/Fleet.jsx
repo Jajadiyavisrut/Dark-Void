@@ -60,6 +60,11 @@ export default function Fleet() {
 
   const idleAssets = fleet.filter(a => a.status === 'idle')
   const inUseAssets = fleet.filter(a => a.status === 'in_use')
+  const idleTonnage = idleAssets.reduce((sum, a) => sum + (Number(a.capacity_tonnes) || 0), 0)
+  const activeLoadPct = fleet.length > 0 ? Math.round((inUseAssets.length / fleet.length) * 100) : 0
+  const truckCount = fleet.filter(a => a.type?.toLowerCase() === 'truck').length
+  const containerCount = fleet.filter(a => a.type?.toLowerCase() === 'container').length
+  const uniqueHubs = Array.from(new Set(fleet.map(a => a.location).filter(Boolean)))
 
   // Filtered rows
   const filteredFleet = useMemo(() => {
@@ -299,7 +304,7 @@ export default function Fleet() {
             <span style={{ fontSize: 36, fontWeight: 700, fontFamily: 'JetBrains Mono, monospace', color: 'var(--amber-txt)' }}>
               {idleAssets.length}
             </span>
-            <span style={{ fontSize: 12, color: 'var(--text-3)' }}>133 Tonnage ready</span>
+            <span style={{ fontSize: 12, color: 'var(--text-3)' }}>{idleTonnage} Tonnage ready</span>
           </div>
           <div style={{
             marginTop: 14,
@@ -334,7 +339,7 @@ export default function Fleet() {
             <span style={{ fontSize: 36, fontWeight: 700, fontFamily: 'JetBrains Mono, monospace', color: 'var(--green-txt)' }}>
               {inUseAssets.length}
             </span>
-            <span style={{ fontSize: 12, color: 'var(--text-3)' }}>40% active load</span>
+            <span style={{ fontSize: 12, color: 'var(--text-3)' }}>{activeLoadPct}% active load</span>
           </div>
           <div style={{
             marginTop: 14,
@@ -378,13 +383,15 @@ export default function Fleet() {
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>Regional Node Density: Western &amp; Decan Corridors</span>
+              <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>
+                Regional Node Density: {uniqueHubs.slice(0, 3).join(', ')}{uniqueHubs.length > 3 ? ' & More' : ''}
+              </span>
               <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', padding: '2px 7px', borderRadius: 9999, background: 'rgba(56,189,248,0.15)', color: 'var(--cyan)' }}>
-                8 Hubs Active
+                {uniqueHubs.length} Hubs Active
               </span>
             </div>
             <p style={{ margin: '2px 0 0', fontSize: 12, color: 'var(--text-3)' }}>
-              Surat, Nagpur, Mumbai &amp; Ahmedabad contain 60% surplus capacity available for multi-stop re-routing.
+              {idleAssets.length} idle units ({idleTonnage}T capacity) available across {uniqueHubs.length} logistics hubs for multi-stop re-routing.
             </p>
           </div>
         </div>
@@ -450,14 +457,14 @@ export default function Fleet() {
                 className={`filter-pill ${typeFilter === 'Truck' ? 'active' : ''}`}
                 onClick={() => setTypeFilter('Truck')}
               >
-                Trucks (5)
+                Trucks ({truckCount})
               </button>
               <button
                 type="button"
                 className={`filter-pill ${typeFilter === 'Container' ? 'active' : ''}`}
                 onClick={() => setTypeFilter('Container')}
               >
-                Containers (3)
+                Containers ({containerCount})
               </button>
             </div>
 

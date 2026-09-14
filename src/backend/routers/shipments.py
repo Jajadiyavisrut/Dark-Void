@@ -29,20 +29,33 @@ def get_analytics(user: str = Depends(get_current_user)):
     on_time = len([s for s in shipments if s.get("status") == "on_time"])
     cold_chain = len([s for s in shipments if s.get("cold_chain")])
 
+    carriers = sorted(list(set(s.get("carrier") for s in shipments if s.get("carrier"))))
+    carrier_efficiency = []
+    for c in carriers:
+        c_shipments = [s for s in shipments if s.get("carrier") == c]
+        c_total = len(c_shipments)
+        c_ontime = len([s for s in c_shipments if s.get("status") == "on_time"])
+        score = round((c_ontime / max(1, c_total)) * 100) if c_total > 0 else 100
+        carrier_efficiency.append({
+            "carrier": c,
+            "score_pct": score,
+            "status": "optimal" if score >= 85 else "warning" if score >= 60 else "critical",
+            "total_assigned": c_total,
+            "delayed_assigned": c_total - c_ontime,
+            "note": "Corridor SLA compliant" if score >= 85 else "Subject to port drayage penalty review"
+        })
+
     return {
         "total_shipments": total,
         "delayed_count": delayed,
         "on_time_count": on_time,
         "cold_chain_count": cold_chain,
         "mesh_latency_ms": 14,
-        "network_sla_pct": 99.98,
+        "network_sla_pct": round((on_time / max(1, total)) * 100, 2),
         "auto_reroute_active": True,
-        "carrier_efficiency": [
-            {"carrier": "Carrier A", "score_pct": 62, "status": "warning", "note": "Subject to port drayage penalty review"},
-            {"carrier": "Carrier B", "score_pct": 99, "status": "optimal", "note": "North corridor highest reliability"},
-            {"carrier": "Carrier C", "score_pct": 95, "status": "optimal", "note": "Western express verified"}
-        ]
+        "carrier_efficiency": carrier_efficiency
     }
+
 
 
 @router.get("/{shipment_id}")

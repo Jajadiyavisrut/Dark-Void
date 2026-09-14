@@ -4,69 +4,139 @@
     "type": "truck",
     "status": "idle",
     "location": "Surat",
-    "capacity_tonnes": 20
+    "capacity_tonnes": 20,
+    "destination": null,
+    "assigned_route": null,
+    "driver": "Ramesh Patel",
+    "speed_kmh": 0,
+    "battery_pct": 98,
+    "lat": 21.1702,
+    "lng": 72.8311
   },
   {
     "id": "TRK-02",
     "type": "truck",
     "status": "in_use",
     "location": "Delhi",
-    "capacity_tonnes": 15
+    "capacity_tonnes": 15,
+    "destination": "Jaipur",
+    "assigned_route": "NH-48 Jaipur Corridor",
+    "driver": "Gurpreet Singh",
+    "speed_kmh": 58,
+    "battery_pct": 84,
+    "lat": 28.6139,
+    "lng": 77.2090
   },
   {
     "id": "TRK-03",
     "type": "truck",
     "status": "idle",
     "location": "Nagpur",
-    "capacity_tonnes": 20
+    "capacity_tonnes": 20,
+    "destination": null,
+    "assigned_route": null,
+    "driver": "Kailash Jadhav",
+    "speed_kmh": 0,
+    "battery_pct": 92,
+    "lat": 21.1458,
+    "lng": 79.0882
   },
   {
     "id": "TRK-04",
     "type": "truck",
     "status": "in_use",
     "location": "Kolkata",
-    "capacity_tonnes": 25
+    "capacity_tonnes": 25,
+    "destination": "Patna",
+    "assigned_route": "East Freight Highway",
+    "driver": "Subhash Ghosh",
+    "speed_kmh": 62,
+    "battery_pct": 79,
+    "lat": 22.5726,
+    "lng": 88.3639
   },
   {
     "id": "TRK-05",
     "type": "truck",
     "status": "idle",
     "location": "Ahmedabad",
-    "capacity_tonnes": 18
+    "capacity_tonnes": 18,
+    "destination": null,
+    "assigned_route": null,
+    "driver": "Jayesh Shah",
+    "speed_kmh": 0,
+    "battery_pct": 95,
+    "lat": 23.0225,
+    "lng": 72.5714
   },
   {
     "id": "CTN-01",
     "type": "container",
     "status": "idle",
     "location": "Mumbai",
-    "capacity_tonnes": 30
+    "capacity_tonnes": 30,
+    "destination": null,
+    "assigned_route": null,
+    "driver": "Terminal Crane Team",
+    "speed_kmh": 0,
+    "battery_pct": 100,
+    "lat": 18.9499,
+    "lng": 72.8550
   },
   {
     "id": "CTN-02",
     "type": "container",
     "status": "in_use",
     "location": "Chennai",
-    "capacity_tonnes": 30
+    "capacity_tonnes": 30,
+    "destination": "Bengaluru",
+    "assigned_route": "Decan Rail Link",
+    "driver": "Freight Logistics Rail",
+    "speed_kmh": 45,
+    "battery_pct": 89,
+    "lat": 13.0827,
+    "lng": 80.2707
   },
   {
     "id": "CTN-03",
     "type": "container",
     "status": "idle",
     "location": "Hyderabad",
-    "capacity_tonnes": 25
+    "capacity_tonnes": 25,
+    "destination": null,
+    "assigned_route": null,
+    "driver": "Inland Port Logistics",
+    "speed_kmh": 0,
+    "battery_pct": 97,
+    "lat": 17.3850,
+    "lng": 78.4867
   },
   {
     "id": "VSL-01",
     "type": "vessel",
     "status": "in_use",
     "location": "PORT-A",
-    "capacity_tonnes": 500
+    "capacity_tonnes": 500,
+    "destination": "Mumbai Port",
+    "assigned_route": "Arabian Sea Corridor",
+    "driver": "Capt. Arvind Nair",
+    "speed_kmh": 22,
+    "battery_pct": 96,
+    "lat": 18.9220,
+    "lng": 72.8347
   },
   {
     "id": "VSL-02",
     "type": "vessel",
     "status": "idle",
     "location": "PORT-B",
-    "capacity_tonnes": 450
+    "capacity_tonnes": 450,
+    "destination": null,
+    "assigned_route": null,
+    "driver": "Capt. Meera Menon",
+    "speed_kmh": 0,
+    "battery_pct": 100,
+    "lat": 18.9500,
+    "lng": 72.9500
   }
 ]

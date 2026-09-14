@@ -1,44 +1,68 @@
 [
   {
     "shipment_id": "SHP-1001",
+    "cargo_type": "Pharma Vaccines (mRNA)",
     "required_min_c": 2,
     "required_max_c": 8,
     "current_temp_c": 11.3,
-    "breach_duration_hours": 2.5
+    "breach_duration_hours": 2.5,
+    "battery_pct": 94,
+    "sensor_protocol": "Cryo-Air Dual",
+    "temperature_curve": [3.2, 4.0, 5.5, 7.8, 9.6, 11.3]
   },
   {
     "shipment_id": "SHP-1004",
+    "cargo_type": "Insulin Cartridges",
     "required_min_c": 2,
     "required_max_c": 8,
     "current_temp_c": 5.1,
-    "breach_duration_hours": 0
+    "breach_duration_hours": 0,
+    "battery_pct": 98,
+    "sensor_protocol": "Standard Bio-Chilled",
+    "temperature_curve": [4.8, 5.0, 5.2, 5.1, 5.0, 5.1]
   },
   {
     "shipment_id": "SHP-1005",
+    "cargo_type": "Cryogenic Blood Plasma",
     "required_min_c": -18,
     "required_max_c": -15,
     "current_temp_c": -10.2,
-    "breach_duration_hours": 3.1
+    "breach_duration_hours": 3.1,
+    "battery_pct": 88,
+    "sensor_protocol": "Ultra-Low Dry Ice",
+    "temperature_curve": [-17.2, -16.5, -14.8, -13.0, -11.5, -10.2]
   },
   {
     "shipment_id": "SHP-1008",
+    "cargo_type": "Biologic Reagents",
     "required_min_c": 15,
     "required_max_c": 25,
     "current_temp_c": 20.0,
-    "breach_duration_hours": 0
+    "breach_duration_hours": 0,
+    "battery_pct": 95,
+    "sensor_protocol": "Ambient Controlled",
+    "temperature_curve": [19.5, 19.8, 20.1, 20.0, 20.2, 20.0]
   },
   {
     "shipment_id": "SHP-1010",
+    "cargo_type": "Oncology Infusions",
     "required_min_c": 2,
     "required_max_c": 8,
     "current_temp_c": 9.8,
-    "breach_duration_hours": 1.2
+    "breach_duration_hours": 1.2,
+    "battery_pct": 91,
+    "sensor_protocol": "Cryo-Air Dual",
+    "temperature_curve": [4.1, 5.6, 6.9, 8.2, 9.1, 9.8]
   },
   {
     "shipment_id": "SHP-1015",
+    "cargo_type": "Enzyme Therapeutics",
     "required_min_c": 2,
     "required_max_c": 8,
     "current_temp_c": 3.5,
-    "breach_duration_hours": 0
+    "breach_duration_hours": 0,
+    "battery_pct": 99,
+    "sensor_protocol": "Standard Bio-Chilled",
+    "temperature_curve": [3.2, 3.4, 3.6, 3.5, 3.4, 3.5]
   }
 ]

@@ -114,6 +114,9 @@ export default function Disruptions() {
     return true
   })
 
+  // Dynamic analytics strip aggregates
+  const totalCostAvoidance = disruptions.reduce((acc, d) => acc + (d.cost_avoidance_usd || 0), 0)
+
   if (loading) return <p className="state-msg">Loading Disruption Command Center…</p>
   if (error)   return <p className="state-msg" style={{color:'var(--danger)'}}>Error: {error}</p>
 
@@ -256,7 +259,7 @@ export default function Disruptions() {
                 Port Impedance
               </div>
               <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', fontFamily: 'JetBrains Mono, monospace' }}>
-                36h Avg Berth Hold
+                {disruptions.find(d => d.type === 'port_closure')?.est_clearance || '36h Avg Hold'}
               </div>
             </div>
           </div>
@@ -284,7 +287,7 @@ export default function Disruptions() {
                 Autopilot Reroutes
               </div>
               <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', fontFamily: 'JetBrains Mono, monospace' }}>
-                9 Shipments Protected
+                {activeCount} Corridors Active
               </div>
             </div>
           </div>
@@ -309,10 +312,10 @@ export default function Disruptions() {
             </div>
             <div>
               <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', fontFamily: 'JetBrains Mono, monospace' }}>
-                Estimated Cargo Saved
+                Estimated Demurrage Saved
               </div>
               <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', fontFamily: 'JetBrains Mono, monospace' }}>
-                $3.42M Value
+                ${(totalCostAvoidance / 1000).toFixed(1)}k Value
               </div>
             </div>
           </div>
@@ -364,7 +367,7 @@ export default function Disruptions() {
                       <span>Started: {new Date(d.started_at).toLocaleString()}</span>
                       <span>•</span>
                       <span style={{ color: isHigh ? 'var(--red-txt)' : 'var(--amber-txt)' }}>
-                        Est. Clearance: {d.id === 'DIST-001' ? '36 hours' : d.id === 'DIST-002' ? '4.5 hours' : 'Downgraded / Clear'}
+                        Est. Clearance: {d.est_clearance || 'Calculated'}
                       </span>
                     </div>
                   </div>
@@ -376,7 +379,7 @@ export default function Disruptions() {
                       Direct Impact
                     </div>
                     <div style={{ fontSize: 13, fontWeight: 600, color: isHigh ? 'var(--red-txt)' : 'var(--amber-txt)', fontFamily: 'JetBrains Mono, monospace' }}>
-                      {d.id === 'DIST-001' ? '6 Vessels Delayed' : d.id === 'DIST-002' ? '3 Trucks Impacted' : 'Maritime Cleared'}
+                      {d.direct_impact || 'Impacted'}
                     </div>
                   </div>
                   <div className="icon-btn" style={{ border: 'none', background: 'rgba(255,255,255,0.05)' }}>
@@ -402,21 +405,14 @@ export default function Disruptions() {
                       <p style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.6, margin: 0 }}>
                         {d.description}
                       </p>
-                      {d.id === 'DIST-001' && (
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginTop: 12 }}>
-                          {['MV-ORION-9 (+28h)', 'CMA-KALYAN (+36h)', 'EVER-MERIDIAN (+41h)'].map((v, i) => (
+                      {d.impacted_units && d.impacted_units.length > 0 && (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginTop: 12 }}>
+                          {d.impacted_units.map((unit, i) => (
                             <div key={i} style={{ padding: '6px 8px', borderRadius: 'var(--r-sm)', background: 'rgba(255,255,255,0.03)', fontSize: 11, fontFamily: 'JetBrains Mono, monospace' }}>
-                              <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 9 }}>VESSEL</span>
-                              <span style={{ color: 'var(--red-txt)', fontWeight: 600 }}>{v}</span>
+                              <span style={{ color: 'var(--text-muted)', display: 'block', fontSize: 9 }}>ASSET / UNIT</span>
+                              <span style={{ color: isHigh ? 'var(--red-txt)' : 'var(--amber-txt)', fontWeight: 600 }}>{unit}</span>
                             </div>
                           ))}
-                        </div>
-                      )}
-                      {d.id === 'DIST-002' && (
-                        <div style={{ display: 'flex', gap: 16, marginTop: 12, fontSize: 12, fontFamily: 'JetBrains Mono, monospace', color: 'var(--text-3)' }}>
-                          <span>Velocity: <strong style={{ color: 'var(--red-txt)' }}>0 km/h</strong></span>
-                          <span>•</span>
-                          <span>Cargo Temp: <strong style={{ color: 'var(--green-txt)' }}>4.2°C (Optimal)</strong></span>
                         </div>
                       )}
                     </div>
@@ -433,16 +429,16 @@ export default function Disruptions() {
                     }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <span style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: 'var(--cyan)' }}>
-                          {d.id === 'DIST-001' ? 'GEO: 18.9499° N, 72.8550° E' : d.id === 'DIST-002' ? 'NH-48 KM 124.8 POST' : 'BAY OF BENGAL EAST COAST'}
+                          {d.coordinates ? `NODE: ${d.coordinates}` : `CORRIDOR: ${d.affected_node}`}
                         </span>
                         <span style={{ width: 7, height: 7, borderRadius: '50%', background: isHigh ? 'var(--red-txt)' : 'var(--green-txt)' }} />
                       </div>
                       <div style={{ marginTop: 12 }}>
                         <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
-                          {d.id === 'DIST-001' ? 'JNPT Terminal Alternative Node' : d.id === 'DIST-002' ? 'SH-17 Bypass Corridor Ready' : 'Coastal Maritime Clearance'}
+                          {d.alternative_node || 'Optimal Alternative Route'}
                         </div>
                         <div style={{ fontSize: 12, color: 'var(--green-txt)', marginTop: 2 }}>
-                          {d.id === 'DIST-001' ? 'Optimal Alternative · 31 NM Distance' : d.id === 'DIST-002' ? '+18 km bypass · -4h 25m vs wait' : 'Corridors normalized'}
+                          {d.active ? 'Active Corridor Divert Ready' : 'Corridors normalized'}
                         </div>
                       </div>
                     </div>
@@ -467,30 +463,26 @@ export default function Disruptions() {
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                           <span className="rec-label">AI Recommended Action</span>
-                          <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', color: 'var(--cyan)' }}>
-                            Confidence: 97.4%
-                          </span>
+                          {d.confidence_score && (
+                            <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', color: 'var(--cyan)' }}>
+                              Confidence: {d.confidence_score}%
+                            </span>
+                          )}
                         </div>
                         <p style={{ margin: '4px 0 0', color: 'var(--text)', fontSize: 13, fontWeight: 500 }}>
-                          {d.id === 'DIST-001'
-                            ? 'Reroute incoming SHP-1001 & SHP-1003 to Jawaharlal Nehru Custom Port (JNPT). Saves approx. 14h dock wait time.'
-                            : d.id === 'DIST-002'
-                            ? 'Divert fleet via State Highway 17 bypass (+18 km, +35 min delay instead of prolonged +5h stall).'
-                            : 'All rerouted coastal tankers adhering to normalized speed profile. Ready to archive incident log.'}
+                          {d.recommendation_summary || 'Autonomous alternative available.'}
                         </p>
-                        <span style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono, monospace' }}>
-                          {d.id === 'DIST-001'
-                            ? 'Cost Delta: -$12,400 demurrage penalty avoidance · 2 Carrier captains notified'
-                            : d.id === 'DIST-002'
-                            ? 'Driver telematics ready for automated dispatch push'
-                            : 'Standard post-mortem generated with meteorological telemetry archive'}
-                        </span>
+                        {d.cost_avoidance_usd > 0 && (
+                          <span style={{ display: 'block', marginTop: 4, fontSize: 11, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono, monospace' }}>
+                            Cost Delta: -${d.cost_avoidance_usd.toLocaleString()} demurrage penalty avoidance
+                          </span>
+                        )}
                       </div>
                     </div>
 
                     {/* Action Triggers */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                      {d.id === 'DIST-001' && (
+                      {d.action_type === 'approve_reroute' && d.active && (
                         <button
                           className="btn btn-primary btn-sm"
                           onClick={() => handleApproveReroute(d.id)}
@@ -498,10 +490,10 @@ export default function Disruptions() {
                           type="button"
                         >
                           <Zap size={14} />
-                          <span>{submittingAction[d.id] === 'approving' ? 'Approving…' : 'Approve AI Reroute (1-Click)'}</span>
+                          <span>{submittingAction[d.id] === 'approving' ? 'Approving…' : (d.action_label || 'Approve AI Reroute')}</span>
                         </button>
                       )}
-                      {d.id === 'DIST-002' && (
+                      {d.action_type === 'dispatch_drivers' && d.active && (
                         <button
                           className="btn btn-primary btn-sm"
                           onClick={() => handleDispatchDrivers(d.id)}
@@ -509,7 +501,7 @@ export default function Disruptions() {
                           type="button"
                         >
                           <Send size={14} />
-                          <span>{submittingAction[d.id] === 'dispatching' ? 'Dispatching…' : 'Dispatch Route Change to Drivers'}</span>
+                          <span>{submittingAction[d.id] === 'dispatching' ? 'Dispatching…' : (d.action_label || 'Dispatch Route Change to Drivers')}</span>
                         </button>
                       )}
                       {!d.active && (
@@ -519,7 +511,7 @@ export default function Disruptions() {
                           disabled={submittingAction[d.id] === 'archiving'}
                           type="button"
                         >
-                          {submittingAction[d.id] === 'archiving' ? 'Archiving…' : 'Archive Incident Log'}
+                          {submittingAction[d.id] === 'archiving' ? 'Archiving…' : (d.action_label || 'Archive Incident Log')}
                         </button>
                       )}
                     </div>

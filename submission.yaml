@@ -17,9 +17,10 @@ submission:
   problem_statement: >
     Supply chain disruptions like port strikes cascade across shipments, causing fleet assets to idle. Simultaneously, cold chain shipments lack real-time temperature monitoring, leading to undetected spoilage before delivery.
   solution_summary: >
-    SupplyFlow AI is a Streamlit dashboard and Python MCP server that correlates active disruptions with shipments, identifies idle fleet assets, and monitors cold chain IoT logs. It integrates with IBM Bob to conversationalize supply chain triage.
+    SupplyFlow AI is an enterprise supply chain resilience platform featuring a React 18 Liquid Obsidian glassmorphic operations console, an asynchronous FastAPI backend, a Python MCP Server for IBM Bob agent triage, and a companion analytics suite. It correlates active disruptions across shipments, recommends alternative carriers and re-routing corridors, identifies idle fleet capacity for rapid redeployment, and audits cold-chain IoT telemetry to prevent cargo spoilage before delivery.
   key_features:
-    - "Real-time shipment disruption mapping and reroute recommendations"
-    - "Idle fleet asset identification for rapid redeployment"
-    - "IoT temperature excursion detection with regulatory severity classification"
-    - "Conversational supply chain triage using IBM Bob via custom MCP Server"
+    - "Real-time multi-modal disruption correlation with automated reroute and carrier recommendations"
+    - "Fleet asset utilization optimizer with idle capacity pooling and instant dispatch"
+    - "Cold chain IoT telemetry surveillance with FDA 21 CFR / EU GDP excursion severity classification"
+    - "Interactive IBM Bob AI conversational triage enabled via high-speed Model Context Protocol (MCP) server"
+    - "Ultra-premium Liquid Obsidian dark glass command cockpit with sub-second live state synchronization"
