@@ -1,4 +1,4 @@
-# 🚀 SupplyFlow AI: Supply Chain Disruption Assistant & Fleet Utilisation Optimizer
+# 🚀 SupplyFlow AI — Supply Chain Disruption Assistant & Fleet Utilisation Optimizer
 
 ---
 
@@ -8,30 +8,30 @@
 |---|---|
 | **Team Name** | Daredevils |
 | **Track** | AI |
-| **Team Lead** | Yug Bhatt — yug@example.com |
+| **Team Lead** | Yug Bhatt |
 | **Members** | Visrut Jajadiya, Maharsh Solanki, Milan Vadhel |
 
 ---
 
 ## 🎯 Problem Statement
 
-Supply chain disruptions like port strikes cascade across shipments, causing fleet assets to idle. Simultaneously, cold chain shipments lack real-time temperature monitoring, leading to undetected spoilage before delivery.
+Supply chain disruptions — port strikes, bad weather, geopolitical events — cascade across hundreds of active shipments in ways impossible to track manually. Fleet assets sit idle while other routes are overloaded. Cold chain shipments are especially vulnerable: a single temperature excursion can spoil a $500K+ cargo, discovered only at delivery when it is already too late.
 
 ---
 
 ## 💡 Solution
 
-**SupplyFlow AI** is a Streamlit dashboard and Python MCP server that correlates active disruptions with shipments, identifies idle fleet assets, and monitors cold chain IoT logs. It integrates with IBM Bob to conversationalize supply chain triage.
+**SupplyFlow AI** is a React + FastAPI dashboard that instantly identifies which shipments are affected by an active disruption, recommends reroutes and alternative carriers, surfaces idle fleet assets for redeployment, and monitors cold chain IoT sensor logs to classify temperature excursions by regulatory severity — all before delivery.
 
 ---
 
 ## ✨ Key Features
 
-- **Disruption Detection & Impact Analysis:** Handles events such as port closures and automatically identifies affected shipments.
-- **Route & Carrier Recommendation:** Suggests alternative routes and available carriers if current ones are affected.
-- **Fleet Utilisation:** Identifies idle vehicles or other assets and suggests redeployment opportunities.
-- **Cold Chain Monitoring:** Analyzes sensor data to detect temperature excursions before delivery.
-- **AI Recommendation & Chat Assistant:** Provides prioritized action plans using IBM Bob via a custom MCP Server.
+- **Disruption Detection:** Maps active disruptions to affected shipments by route node matching
+- **Reroute Recommendations:** Suggests alternative routes with estimated delay deltas
+- **Fleet Utilisation:** Highlights idle assets and matches them to disrupted shipments
+- **Cold Chain Monitoring:** Classifies temperature breaches as WARNING or CRITICAL using the regulatory 2-hour threshold
+- **AI Recommendation Engine:** Assembles plain-language action summaries — no LLM or API key required
 
 ---
 
@@ -39,53 +39,56 @@ Supply chain disruptions like port strikes cascade across shipments, causing fle
 
 | Category | Technologies |
 |---|---|
-| **Languages** | Python |
-| **Frameworks** | Streamlit |
-| **IBM Technologies** | IBM Bob, MCP (Model Context Protocol), watsonx.ai |
-| **Databases** | Local JSON (Mock Data) |
-| **Other** | python-dotenv |
+| **Languages** | Python 3.10+, JavaScript (JSX) |
+| **Frameworks** | FastAPI, React 18, Vite |
+| **IBM Technologies** | IBM Bob (hackathon submission context) |
+| **Data** | Mock JSON fixtures (self-contained, no DB) |
+| **Other** | python-dotenv, React Router, Axios |
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-├── src/                  # All source code (Streamlit + MCP server)
-├── docs/                 # Written documentation
-│   ├── problem-statement.md
-│   ├── solution-overview.md
-│   ├── architecture.md
-│   ├── setup-guide.md
-├── demo/                 # Demo artifacts
-│   ├── screenshots/      # App screenshots
-│   ├── demo-video-link.txt  # Link to demo video
-├── presentation/         # Slide deck
-├── submission.yaml       # Structured submission metadata
+src/
+├── backend/
+│   ├── main.py              # FastAPI app entry
+│   ├── routers/             # API route handlers
+│   ├── engine/              # Disruption, fleet, cold chain, recommendation logic
+│   ├── data/                # Mock JSON fixtures
+│   ├── requirements.txt
+│   └── .env.example
+└── frontend/
+    ├── src/
+    │   ├── api/client.js    # Axios API client
+    │   ├── components/      # Navbar, KPICard, AlertBadge
+    │   ├── pages/           # Dashboard, Disruptions, Fleet, ColdChain
+    │   └── styles/index.css # Dark theme design system
+    ├── vite.config.js
+    └── package.json
+docs/
+├── problem-statement.md
+├── solution-overview.md
+├── architecture.md
+└── setup-guide.md
 ```
 
 ---
 
 ## 🚀 How to Run
 
-> **Copy these exact steps from your [`docs/setup-guide.md`](docs/setup-guide.md)**
-
 ```bash
-# 1. Clone the repo
-git clone https://github.com/Jajadiyavisrut/Dark-Void.git
-cd Dark-Void
-
-# 2. Install dependencies
+# Backend
+cd src/backend
 python -m venv .venv
-.venv\Scripts\activate
-pip install -r src/requirements.txt
+.venv\Scripts\activate        # Windows
+pip install -r requirements.txt
+uvicorn main:app --reload     # runs on :8000
 
-# 3. Configure environment
-cp src/.env.example src/.env
-# Edit src/.env with your values
-
-# 4. Run the project
-cd src
-streamlit run app.py
+# Frontend (new terminal)
+cd src/frontend
+npm install
+npm run dev                   # runs on :5173
 ```
 
 ---
@@ -95,22 +98,19 @@ streamlit run app.py
 | Artifact | Link |
 |---|---|
 | 📹 Demo Video | [See demo/demo-video-link.txt](demo/demo-video-link.txt) |
-| 🌐 Live Demo | NOT DEPLOYED |
 | 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
-| 📊 Presentation | [See presentation/slides.pdf](presentation/) |
+| 📊 Presentation | [See presentation/](presentation/) |
 
 ---
 
 ## ⚠️ Known Limitations
 
-> Be honest - judges appreciate transparency over overclaiming.
-
-- Authentication is mocked - not production-ready.
-- Uses mock JSON data instead of a live database.
-- Reroute logic is a naive heuristic (ponytail: O(n) hardcoded routes) rather than a full Dijkstra/A* graph traversal.
+- Uses mock JSON data — not connected to a live database or real IoT feeds
+- Reroute logic is a hardcoded lookup table (ponytail: O(1) map, upgrade to graph traversal for real route networks)
+- No authentication — not production-ready
 
 ---
 
 ## 🏆 What We're Most Proud Of
 
-The seamless integration of our core Python logic with IBM Bob via an MCP Server, allowing natural language queries directly against live supply chain state without building a complex conversational UI from scratch.
+The recommendation engine delivers actionable, context-aware supply chain triage in plain language without any LLM or external API — pure deterministic Python logic from three focused engine modules.
